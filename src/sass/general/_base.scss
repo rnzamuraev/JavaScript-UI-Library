@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: $fontFamilyBasic, sans-serif;
+}
+
+body {
+  font-family: $fontFamilyBasic, sans-serif;
+  // font-size: $fontSize;
+  font-weight: $fontWeight;
+  color: $color;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: rem(1440);
+}
+
+@media (max-width: em(1200)) {
+  .container {
+    // margin: 0 auto;
+    max-width: rem(960);
+  }
+}

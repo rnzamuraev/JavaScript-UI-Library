@@ -1,2 +1,8 @@
 node_modules
 private
+src/css
+src/img
+src/js
+src/scss
+src/sprite
+src/index.html
