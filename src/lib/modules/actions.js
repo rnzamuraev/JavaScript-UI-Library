@@ -1,4 +1,8 @@
 import $ from "../core";
+<<<<<<< HEAD
+=======
+import "./handlers";
+>>>>>>> 006058d11c8c5b1dacaa0769a8ccc492834901ea
 
 // html
 $.prototype.html = function (content) {
