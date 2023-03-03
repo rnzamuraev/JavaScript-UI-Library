@@ -10,7 +10,14 @@ $.prototype.modal = function () {
     $(this[i]).on("click", (e) => {
       e.preventDefault();
 
-      $(targetId).show("flex");
+      console.log($(this[i]));
+      console.log($(this[i]).contains("hamburger"));
+      if ($(this[i]).contains("hamburger")) {
+        $(targetId).show("block");
+      } else {
+        $(targetId).show("flex");
+      }
+
       body.overflow = "hidden";
       body.paddingRight = `${scrolling}px`;
     });
@@ -34,7 +41,7 @@ $.prototype.modal = function () {
     function close() {
       body.overflow = "";
       body.paddingRight = 0;
-      $(targetId).closest(".modal").hide("none");
+      $(targetId).hide("none");
 
       $(targetId).off("click", (e) =>
         closeTheModal(e, targetId)

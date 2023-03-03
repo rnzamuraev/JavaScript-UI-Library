@@ -31,7 +31,7 @@ $.prototype.toggleClass = function (classNeme) {
   return this;
 };
 
-$.prototype.containsClass = function (classNeme) {
+$.prototype.contains = function (classNeme) {
   for (let i = 0; i < this.length; i++) {
     if (!this[i].classList) {
       continue;
