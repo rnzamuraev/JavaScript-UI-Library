@@ -2,12 +2,12 @@
   display: inline-block;
   position: relative;
   transition: all 2s;
-  &__btn {
-    width: rem(15);
-    height: rem(15);
-    border: none;
-    background-color: transparent;
-  }
+  // &__toggle {
+    // width: rem(15);
+    // height: rem(15);
+    // border: none;
+    // background-color: transparent;
+  // }
   &__arrow {
     width: 100%;
   }
@@ -16,7 +16,7 @@
     padding: 0 0 rem(15) rem(10);
     display: flex;
     flex-direction: column;
-    // border: 1px solid #000000;
+    // border: 1px solid $primary;
     // border-radius: 2px;
     position: absolute;
     top: 100%;
@@ -29,5 +29,9 @@
   }
   &__link {
     text-decoration: none;
+    color: $primary;
+    &:hover {
+      color: $success;
+    }
   }
 }

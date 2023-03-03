@@ -1,5 +1,4 @@
 .btn {
-  padding: $myPaddingBtn;
   display: $myDisplayBtn;
   border: $myBorderBtn;
   border-radius: $myBorderRadiusBtn;
@@ -15,6 +14,12 @@
   &:hover {
     background-color: $myBgColorBtn;
     color: $myColorBtn;
+  }
+  &__icon {
+    border: none;
+    width: rem(14);
+    height: rem(14);
+    background-color: transparent;
   }
   @import "./button__btn";
 }

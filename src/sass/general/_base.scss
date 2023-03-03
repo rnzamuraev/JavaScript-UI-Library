@@ -14,12 +14,50 @@ body {
 
 .container {
   margin: 0 auto;
-  max-width: rem(1440);
+  // padding: 0 rem($contPaddingXl);
+  max-width: rem($contWidthXl);
 }
 
-@media (max-width: em(1200)) {
+@media (max-width: em($mediaLg)) {
   .container {
-    // margin: 0 auto;
-    max-width: rem(960);
+    max-width: rem($contWidthLg);
   }
 }
+@media (max-width: em($mediaMd)) {
+  .container {
+    max-width: rem($contWidthMd);
+    // padding: 0 rem(20);
+  }
+}
+@media (max-width: em($mediaSm)) {
+  .container {
+    @include SizeRem(
+      "max-width",
+      $mediaSm,
+      320,
+      $mediaSm,
+      320
+    );
+    @include SizeRem(
+      "padding",
+      $contPaddingMd,
+      $contPaddingXs,
+      $mediaSm,
+      320
+    );
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+// @media (max-width: em($mediaSm)) {
+//   .container {
+//     max-width: rem($contWidthSm);
+//     padding: 0 rem(contPaddingSm);
+//   }
+// }
+// @media (max-width: em($mediaXs)) {
+//   .container {
+//   @include SizeRem("max-width", $mediaXs, 320, $mediaXs, 320);
+//   @include SizeRem("padding", $contPaddingSm, contPaddingXs, $mediaXs, 320);
+//   }
+// }

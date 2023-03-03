@@ -38,7 +38,7 @@ $myPaddingBtn: rem(10) rem(15);
 $myDisplayBtn: inline-block;
 $myBorderBtn: 1px solid $primary;
 $myBorderRadiusBtn: rem(4);
-$myBgColorBtn: $primary;
+$myBgColorBtn: transparent;
 $myFontSizeBtn: rem(14);
 $myFontWeightBtn: 500;
 $myColorBtn: $white;
@@ -47,3 +47,25 @@ $myLineHeightBtn: 1.5;
 $myVerticalAlignBtn: middle;
 $myTransitionBtn: all 0.2s;
 $myCursorBtn: pointer;
+
+// @media
+$mediaXl: 1440;
+$mediaLg: 1200;
+$mediaMd: 992;
+$mediaSm: 768;
+$mediaXs: 580;
+
+// container
+// max-width
+$contWidthXxl: 1300;
+$contWidthXl: 1140;
+$contWidthLg: 960;
+$contWidthMd: 718;
+$contWidthSm: 540;
+$contWidthXs: 320;
+// padding
+// $contPaddingXl: 1200;
+// $contPaddingLg: 992;
+$contPaddingMd: 35;
+$contPaddingSm: 94;
+$contPaddingXs: 20;

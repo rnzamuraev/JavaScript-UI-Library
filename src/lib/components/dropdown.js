@@ -1,10 +1,13 @@
 import $ from "../core";
 
 $.prototype.dropdown = function () {
-  console.log(this);
   for (let i = 0; i < this.length; i++) {
-    const element = this[i];
+    const id = $(this[i]).getAttr("id");
+
+    $(this[i]).on("click", () => {
+      $(`[data-toggle-id="${id}"]`).toggle("flex");
+    });
   }
 };
 
-$(".dropdown").dropdown();
+$(".dropdown__toggle").dropdown();
