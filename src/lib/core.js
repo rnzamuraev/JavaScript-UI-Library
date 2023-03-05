@@ -2,6 +2,7 @@ const $ = function (selector) {
   return new $.prototype.init(selector);
 };
 
+// Есдине селектор не передан, то возвращает пустой обьект // {}
 $.prototype.init = function (selector) {
   console.log(selector);
   if (!selector) {
@@ -9,7 +10,6 @@ $.prototype.init = function (selector) {
   }
 
   if (selector.tagName) {
-    console.log(" Object.assign(this, selector);");
     // Object.assign(this, selector);
     this[0] = selector;
     this.length = 1;
@@ -18,6 +18,15 @@ $.prototype.init = function (selector) {
 
   Object.assign(this, document.querySelectorAll(selector));
   this.length = document.querySelectorAll(selector).length;
+
+  if (this.length == 0) {
+    throw new Error(
+      `
+      - Что-то пошло не так, такого селектора не существует, $(${selector})
+      - No such selector exists, $(${selector})
+      `
+    );
+  }
 
   return this;
 };

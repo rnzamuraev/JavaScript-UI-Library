@@ -8,5 +8,6 @@ import "./modules/style";
 import "./components/calcScroll";
 import "./components/dropdown";
 import "./components/modal";
+import "./components/tab";
 
 export default $;

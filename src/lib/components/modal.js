@@ -10,9 +10,7 @@ $.prototype.modal = function () {
     $(this[i]).on("click", (e) => {
       e.preventDefault();
 
-      console.log($(this[i]));
-      console.log($(this[i]).contains("hamburger"));
-      if ($(this[i]).contains("hamburger")) {
+      if ($(this[i]).hasAttr("data-hamburger")) {
         $(targetId).show("block");
       } else {
         $(targetId).show("flex");
@@ -22,9 +20,9 @@ $.prototype.modal = function () {
       body.paddingRight = `${scrolling}px`;
     });
 
-    $(targetId).on("click", (e) =>
-      closeTheModal(e, targetId)
-    );
+    $(targetId).on("click", (e) => {
+      closeTheModal(e, targetId);
+    });
   }
 
   function closeTheModal(e, targetId) {
@@ -42,12 +40,13 @@ $.prototype.modal = function () {
       body.overflow = "";
       body.paddingRight = 0;
       $(targetId).hide("none");
+      // console.log("click");
 
-      $(targetId).off("click", (e) =>
-        closeTheModal(e, targetId)
-      );
+      // $(targetId).off("click", (e) =>
+      //   closeTheModal(e, targetId)
+      // );
     }
   }
 };
 
-$("[data-show='modal']").modal();
+$("[data-open='modal']").modal();
