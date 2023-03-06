@@ -79,18 +79,65 @@ $.prototype.index = function () {
   return findMyIndex(this[0]);
 };
 
-// // find
+// find
+$.prototype.find = function (selector) {
+  if (!selector) {
+    throw new Error(
+      `
+      - Что-то пошло не так, селектор небыл передан, __find__ (${selector})
+      - Selector failed, __find__ (${selector})
+    `
+    );
+  }
+  // console.log(selector);
+  // console.log(this);
+  let counter = 0;
+  let arr = [];
+
+  const copiObj = Object.assign({}, this);
+
+  for (let i = 0; i < copiObj.length; i++) {
+    delete this[i];
+    arr[i] = copiObj[i].querySelectorAll(selector);
+    // console.log(arr);
+
+    if (arr[i].length == 0) {
+      continue;
+    }
+
+    // console.log(arr.length);
+    for (let j = 0; j < arr[i].length; j++) {
+      this[counter] = arr[i][j];
+      counter++;
+      // console.log(arr[i][j]);
+      // console.log(j);
+    }
+    console.log(this);
+  }
+  // console.log(this);
+  // console.log(counter);
+  // this.length = counter;
+  // const objLength = Object.keys(this).length;
+  // for (; numberOfIndex < objLength; numberOfIndex++) {
+  //   delete this[numberOfIndex];
+  // }
+
+  this.length = counter;
+  console.log(this);
+  return this;
+};
+
+// find
 // $.prototype.find = function (selector) {
 //   let numberOfIndex = 0;
 //   let counter = 0;
 
 //   const copiObj = Object.assign({}, this);
-//   console.log(selector);
-//   console.log(copiObj);
+//   // console.log(copiObj);
 
 //   for (let i = 0; i < copiObj.length; i++) {
 //     // delete this[i];
-//     let arr = copiObj[i].querySelectorAll(selector);
+//     const arr = copiObj[i].querySelectorAll(selector);
 //     console.log(arr);
 
 //     if (arr.length == 0) {
@@ -101,15 +148,17 @@ $.prototype.index = function () {
 //     for (let j = 0; j < arr.length; j++) {
 //       this[counter] = arr[j];
 //       counter++;
-//       console.log(arr[j]);
+//       // console.log(arr[j]);
 //     }
-//     console.log(this);
+//     // console.log(this);
 //     numberOfIndex += arr.length;
 //     console.log(numberOfIndex);
 //   }
 //   console.log(this);
+//   console.log(counter);
 //   console.log(numberOfIndex);
 //   this.length = numberOfIndex;
+//   console.log(this.length);
 //   const objLength = Object.keys(this).length;
 //   for (; numberOfIndex < objLength; numberOfIndex++) {
 //     delete this[numberOfIndex];
@@ -119,50 +168,9 @@ $.prototype.index = function () {
 //   console.log(this);
 //   return this;
 // };
-// find
-$.prototype.find = function (selector) {
-  let numberOfIndex = 0;
-  let counter = 0;
-
-  const copiObj = Object.assign({}, this);
-  // console.log(selector);
-  // console.log(copiObj);
-  // console.log(copiObj.length);
-
-  for (let i = 0; i < copiObj.length; i++) {
-    // delete this[i];
-    const arr = copiObj[i].querySelectorAll(selector);
-    // console.log(arr);
-
-    if (arr.length == 0) {
-      continue;
-    }
-
-    console.log(arr.length);
-    for (let j = 0; j < arr.length; j++) {
-      this[counter] = arr[j];
-      counter++;
-      // console.log(arr[j]);
-    }
-    // console.log(this);
-    numberOfIndex += arr.length;
-    // console.log(numberOfIndex);
-  }
-  // console.log(this);
-  // console.log(numberOfIndex);
-  this.length = numberOfIndex;
-  const objLength = Object.keys(this).length;
-  for (; numberOfIndex < objLength; numberOfIndex++) {
-    delete this[numberOfIndex];
-  }
-
-  // this.length = counter;
-  console.log(this);
-  return this;
-};
 
 // closest - находит ближайший родительский контайнер по указанному селектору,
-// или сам элемент если он подходит по селектору
+// или сам элемент если он подходит по селектору, возвращает первыйнайденный контайнер
 $.prototype.closest = function (selector) {
   if (!selector) {
     return this;
@@ -192,13 +200,14 @@ $.prototype.closest = function (selector) {
   }
 
   const objLength = Object.keys(this).length;
-  this.length = counter;
+  // this.length = counter;
 
-  for (; counter < objLength; counter++) {
-    delete this[counter];
+  for (let i = 1; i < objLength; i++) {
+    delete this[i];
   }
-  console.log(this);
 
+  this.length = 1;
+  console.log(this);
   return this;
 };
 
@@ -232,7 +241,10 @@ $.prototype.siblings = function () {
 $.prototype.prevSibling = function () {
   if (this.length > 1) {
     throw new Error(
-      `Received more than 1 element node, МETHOD: prevSibling.`
+      `
+         - Что-то пошло не так, передано более 1 элемента, __prevSibling__ (${this})
+        - Received more than 1 element node, __prevSibling__ (${this})
+      `
     );
   }
 
@@ -251,7 +263,10 @@ $.prototype.prevSibling = function () {
 $.prototype.nextSibling = function () {
   if (this.length > 1) {
     throw new Error(
-      `Received more than 1 element node, МETHOD: nextSibling.`
+      `
+        - Что-то пошло не так, передано более 1 элемента, __nextSibling__ (${this})
+        - Received more than 1 element node, __nextSibling__ (${this})
+      `
     );
   }
 
@@ -271,8 +286,8 @@ $.prototype.parent = function (node) {
   if (this.length > 1) {
     throw new Error(
       `
-    - Что-то пошло не так, передано более 1 элемента, __parent__ (${this})
-    - Received more than 1 element node, __parent__ (${this})
+      - Что-то пошло не так, передано более 1 элемента, __parent__ (${this})
+      - Received more than 1 element node, __parent__ (${this})
     `
     );
   }
@@ -299,8 +314,8 @@ $.prototype.children = function () {
   if (this.length > 1) {
     throw new Error(
       `
-      - Что-то пошло не так, передано более 1 элемента, __children__ (${this})
-      - Received more than 1 element node, __children__ (${this})
+        - Что-то пошло не так, передано более 1 элемента, __children__ (${this})
+        - Received more than 1 element node, __children__ (${this})
       `
     );
   }

@@ -12,7 +12,9 @@ $.prototype.addClass = function (...classNemes) {
 
 $.prototype.removeClass = function (...classNemes) {
   for (let i = 0; i < this.length; i++) {
-    if (!this[i].classList) {
+    console.log(this[i]);
+    // console.log(this[i].classList);
+    if (!this[i].classList || this[i] == undefined) {
       continue;
     }
     this[i].classList.remove(...classNemes);

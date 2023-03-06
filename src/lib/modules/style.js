@@ -25,3 +25,15 @@ $.prototype.height = function (value) {
   return this;
 };
 
+$.prototype.maxHeight = function (value) {
+  for (let i = 0; i < this.length; i++) {
+    if (!this[i].style) {
+      continue;
+    }
+
+    this[i].style.maxHeight = value;
+  }
+
+  return this;
+};
+

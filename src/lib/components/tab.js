@@ -1,21 +1,35 @@
 import $ from "../core";
 
-$.prototype.tab = function () {
+$.prototype.tab = function (tabActive, contentActive) {
   for (let i = 0; i < this.length; i++) {
     $(this[i]).on("click", ({ target }) => {
       if ($(target).hasAttr("data-tab")) {
         $(target)
-          .addClass("tab__item-active")
+          .addClass(tabActive)
           .siblings()
-          .removeClass("tab__item-active")
+          .removeClass(tabActive)
           .closest(".tab")
           .find("[data-tabcontent]")
-          .removeClass("tab__content-active")
+          .removeClass(contentActive)
           .eq($(target).index())
-          .addClass("tab__content-active");
+          .addClass(contentActive);
+        // console.log(
+        // $(target)
+        // .addClass(tabActive)
+        // .siblings()
+        // .removeClass(tabActive)
+        // .closest(".tab")
+        // .find("[data-tabcontent]")
+        // .removeClass(contentActive)
+        // .eq($(target).index())
+        // .addClass(contentActive)
+        // );
       }
     });
   }
 };
 
-$("[data-tabpanel]").tab();
+$("[data-tabpanel]").tab(
+  "tab__item-active",
+  "tab__content-active"
+);

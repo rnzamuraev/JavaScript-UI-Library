@@ -9,5 +9,7 @@ import "./components/calcScroll";
 import "./components/dropdown";
 import "./components/modal";
 import "./components/tab";
+import "./components/accordion";
+import "./services/services";
 
 export default $;
