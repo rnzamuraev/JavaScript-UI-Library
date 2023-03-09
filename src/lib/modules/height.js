@@ -1,17 +1,17 @@
 import $ from "../core";
 
-$.prototype.width = function (value) {
-  for (let i = 0; i < this.length; i++) {
-    if (!this[i].style) {
-      continue;
-    }
+// $.prototype.width = function (value) {
+//   for (let i = 0; i < this.length; i++) {
+//     if (!this[i].style) {
+//       continue;
+//     }
 
-    console.log((this[i].style.width = value));
-    this[i].style.width = value;
-  }
+//     console.log((this[i].style.width = value));
+//     this[i].style.width = value;
+//   }
 
-  return this;
-};
+//   return this;
+// };
 
 $.prototype.height = function (value) {
   for (let i = 0; i < this.length; i++) {
@@ -36,4 +36,3 @@ $.prototype.maxHeight = function (value) {
 
   return this;
 };
-

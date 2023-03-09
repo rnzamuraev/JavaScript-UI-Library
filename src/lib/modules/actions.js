@@ -79,7 +79,7 @@ $.prototype.index = function () {
   return findMyIndex(this[0]);
 };
 
-// find
+// find - получает все дочерние элементы по заданному селуктору
 $.prototype.find = function (selector) {
   if (!selector) {
     throw new Error(
@@ -386,6 +386,43 @@ $.prototype.parentAppend = function (parent) {
 
   return this;
 };
+
+// $.prototype.replace = function (val1, val2 = null) {
+//   console.log(val1);
+//   console.log(val2);
+//   if (!val1 ) {
+//     throw new Error(
+//       `
+//         - Что-то пошло не так, не было передано 1 или более значений, __replace__ (${val1}, ${val2})
+//         - Received more than 1 element node, __replace__ (${val1}, ${val2})
+//       `
+//     );
+//   } else if (this.length > 1) {
+//     throw new Error(
+//       `
+//         - Что-то пошло не так, передано более 1 элемента, __replace__ (${this})
+//         - Received more than 1 element node, __replace__ (${this})
+//       `
+//     );
+//   }
+
+//   for (let i = 0; i < this.length; i++) {
+//     if (!this[i].replace) {
+//       continue;
+//     }
+
+//     if (val2 == null) {
+//       console.log("this[i].replace(" + val1 + ", '');");
+//       this[i].replace(val1, "");
+//     } else {
+//       console.log("this[i].replace(val1, val2);");
+//       this[i].replace(val1, val2);
+//     }
+//   }
+
+//   console.log(this);
+//   return this;
+// };
 
 // $.prototype.append = function (...child) {
 //   const arr = [...child];
