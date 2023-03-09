@@ -15,5 +15,8 @@ import "./components/accordion";
 import "./components/carousel";
 import "./services/request";
 import "./animation/effects";
+import "./animation/fadeIn";
+import "./animation/fadeOut";
+import "./animation/fadeToggle";
 
 export default $;
