@@ -14,12 +14,13 @@ $.prototype.accordion = function (
   function toggleAccordion({ target }, elem) {
     if (
       $(target).hasAttr("data-btn") &&
-      $(target).parent().getAttr("data-toggle") ===
-        "accordion"
+      $(target).parent().hasAttr("data-toggle-accordion")
     ) {
       console.log(elem);
       const parent = $(target).parent();
-      const Toggles = $(elem).find("[data-toggle]");
+      const Toggles = $(elem).find(
+        "[data-toggle-accordion]"
+      );
       let ind;
 
       parent.addClass("active");

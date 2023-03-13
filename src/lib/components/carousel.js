@@ -5,7 +5,6 @@ $.prototype.carousel = function (unit = "rem") {
     console.log(this[i]);
     const btnPrev = $(this[i]).find("[data-btn='prev']");
     const btnNext = $(this[i]).find("[data-btn='next']");
-    // const dotsContainer = $(this[i]).find("[data-indicator]");
     const dots = $(this[i]).find("[data-slide-to]");
     const slides = $(this[i]).find("[data-slide]");
     const slidesWrap = $(this[i]).find("[data-slides]");
@@ -15,13 +14,12 @@ $.prototype.carousel = function (unit = "rem") {
         this[i].querySelector("[data-slides]")
       )
       .width.replace(/\D/g, "");
-    console.log(width);
     let slideIndex = 0;
     // const translate = -((width * slideIndex) / 16) + unit;
     // console.log(translate);
 
     slidesWrap.width(100 * +slides.length + "%");
-    console.log(slidesWrap);
+
     for (let i = 0; i < slides.length; i++) {
       console.log(slides[i]);
       if (unit !== "px") {
@@ -41,8 +39,6 @@ $.prototype.carousel = function (unit = "rem") {
 
     function prevSlide(e) {
       e.preventDefault();
-      console.log("prev");
-      // slideIndex--;
 
       if (slideIndex <= 0) {
         slideIndex = slides.length - 1;
@@ -57,8 +53,6 @@ $.prototype.carousel = function (unit = "rem") {
 
     function nextSlide(e) {
       e.preventDefault();
-      console.log("next");
-      // slideIndex++;
 
       if (slideIndex >= slides.length - 1) {
         slideIndex = 0;
@@ -66,21 +60,11 @@ $.prototype.carousel = function (unit = "rem") {
         slideIndex = slideIndex + 1;
       }
 
-      console.log(slideIndex);
       changeSlide();
       changeDot();
     }
 
     function changeSlide() {
-      // console.log(
-      //   slidesWrap
-      //     .transform(
-      //       `translateX(-${
-      //         (width * slideIndex) / 16
-      //       }${unit})`
-      //     )
-      //     .transform()[0]
-      // );
       slidesWrap.transform(
         `translateX(-${(width * slideIndex) / 16}${unit})`
       );
@@ -103,7 +87,6 @@ $.prototype.carousel = function (unit = "rem") {
       dots.removeClass("active");
       $(dot).addClass("active");
       slideIndex = +$(dot).getAttr("data-slide-to");
-      console.log(slideIndex);
       changeSlide();
     }
   }

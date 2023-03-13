@@ -1,38 +1,63 @@
 import $ from "../core";
 
 // html
-$.prototype.html = function (content) {
-  for (let i = 0; i < this.length; i++) {
-    if (!content) {
-      return this[i].innerHTML;
-    }
-    this[i].innerHTML = content;
-  }
-  return this;
-};
+// $.prototype.html = function (content) {
+//   console.log(content);
+//   for (let i = 0; i < this.length; i++) {
+//     if (!content) {
+//       return this[i].innerHTML;
+//     }
 
-// value
-$.prototype.val = function (content) {
-  for (let i = 0; i < this.length; i++) {
-    if (!content) {
-      return this[i].value;
-    }
-    if (content == " ") {
-      this[i].value = " ";
-    } else {
-      this[i].value = content;
-    }
-  }
-  return this;
-};
+//     if (content === " ") {
+//       console.log(content);
+//       this[i].innerHTML = "";
+//     } else {
+//       this[i].innerHTML = content;
+//     }
+//   }
+//   return this;
+// };
+
+// $.prototype.text = function (content) {
+//   console.log(content);
+//   for (let i = 0; i < this.length; i++) {
+//     if (!content) {
+//       return this[i].innerHTML;
+//     }
+
+//     if (content === " ") {
+//       console.log(content);
+//       this[i].textContent = "";
+//     } else {
+//       this[i].textContent = content;
+//     }
+//   }
+//   return this;
+// };
+
+// // value
+// $.prototype.val = function (content) {
+//   for (let i = 0; i < this.length; i++) {
+//     if (!content) {
+//       return this[i].value;
+//     }
+
+//     if (content == " ") {
+//       this[i].value = "";
+//     } else {
+//       this[i].value = content;
+//     }
+//   }
+//   return this;
+// };
 
 // length
-$.prototype.leng = function () {
-  for (let i = 0; i < this.length; i++) {
-    return this[i].value.length;
-  }
-  // return this;
-};
+// $.prototype.leng = function () {
+//   for (let i = 0; i < this.length; i++) {
+//     return this[i].value.length;
+//   }
+//   // return this;
+// };
 
 // eq - находит елемент по указанному индексу
 $.prototype.eq = function (ind) {
@@ -242,7 +267,7 @@ $.prototype.prevSibling = function () {
   if (this.length > 1) {
     throw new Error(
       `
-         - Что-то пошло не так, передано более 1 элемента, __prevSibling__ (${this})
+        - Что-то пошло не так, передано более 1 элемента, __prevSibling__ (${this})
         - Received more than 1 element node, __prevSibling__ (${this})
       `
     );

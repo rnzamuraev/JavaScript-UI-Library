@@ -30,21 +30,11 @@ $.prototype.toggle = function (display = "") {
       continue;
     }
 
-    const theCSSprop = getComputedStyle(
-      this[i]
-    ).getPropertyValue("display");
-
-    if (theCSSprop == "none") {
+    if (getComputedStyle(this[i]).display == "none") {
       this[i].style.display = display;
     } else {
       this[i].style.display = "none";
     }
-
-    // if (this[i].style.display === "none") {
-    //   this[i].style.display = display;
-    // } else {
-    //   this[i].style.display = "none";
-    // }
   }
 
   return this;

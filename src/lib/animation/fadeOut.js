@@ -1,6 +1,6 @@
 import $ from "../core";
 
-$.prototype.fadeOut = function (dur, fin) {
+$.prototype.fadeOut = function (dur = 1, fin) {
   for (let i = 0; i < this.length; i++) {
     const _fadeOut = (complection) => {
       this[i].style.opacity = 1 - complection;
@@ -10,7 +10,7 @@ $.prototype.fadeOut = function (dur, fin) {
       }
     };
 
-    const animate = this.animateOverTime(
+    const animate = this.animateOverTimeOpacity(
       dur,
       _fadeOut,
       fin

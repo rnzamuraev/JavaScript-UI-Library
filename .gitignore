@@ -7,3 +7,5 @@ src/scss
 src/sass
 src/sprite
 src/index.html
+src/mail.php
+src/PHPMailer

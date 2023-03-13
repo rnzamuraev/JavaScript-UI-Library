@@ -32,7 +32,7 @@ $.prototype.post = async function (
 ) {
   let res = await fetch(url, {
     method: "POST",
-    body: data,
+    body: JSON.stringify(data),
   });
 
   if (!res.ok) {
@@ -46,7 +46,7 @@ $.prototype.post = async function (
 
   switch (dataTypeAnswer) {
     case json:
-      return await res.json();
+      return await res.json(JSON.parse(data));
     case text:
       return await res.text();
     case blob:

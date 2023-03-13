@@ -4,7 +4,6 @@ const $ = function (selector) {
 
 // Есдине селектор не передан, то возвращает пустой обьект // {}
 $.prototype.init = function (selector) {
-  console.log(selector);
   if (!selector) {
     return this; // {}
   }
