@@ -1,4 +1,5 @@
 node_modules
+dist
 private
 src/css
 src/img
