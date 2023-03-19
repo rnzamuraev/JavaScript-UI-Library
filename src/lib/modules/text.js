@@ -1,11 +1,12 @@
 import $ from "../core";
+import { _content } from "../services/_content";
+import { _errElements } from "../services/_error";
 
 // html
 $.prototype.html = function (content) {
-  _err(this, "html");
-
   for (let i = 0; i < this.length; i++) {
-    if (!content) {
+    if (content !== "" && !content) {
+      _errElements(this, "html");
       return this[i].innerHTML;
     }
 
@@ -20,10 +21,9 @@ $.prototype.html = function (content) {
 
 // text
 $.prototype.text = function (content) {
-  _err(this, "text");
-
   for (let i = 0; i < this.length; i++) {
-    if (!content) {
+    if (content !== "" && !content) {
+      _errElements(this, "text");
       return this[i].innerHTML;
     }
 
@@ -41,7 +41,8 @@ $.prototype.val = function (content) {
   _err(this, "val");
 
   for (let i = 0; i < this.length; i++) {
-    if (!content) {
+    if (content !== "" && !content) {
+      _errElements(this, "val");
       return this[i].value;
     }
 
@@ -65,25 +66,3 @@ $.prototype.leng = function () {
     return this[i].length;
   }
 };
-
-//
-function _content(content, value) {
-  if (content == " ") {
-    value = "";
-  } else {
-    value = content;
-  }
-
-  return value;
-}
-
-function _err(elem, name) {
-  if (elem.length > 1) {
-    throw new Error(
-      `
-        - Что-то пошло не так, передано более 1 элемента, __${name}__ (${elem[0]})
-        - Received more than 1 element node, __${name}__ (${elem[0]})
-      `
-    );
-  }
-}

@@ -9,9 +9,30 @@ $.prototype.modal = function () {
 
     $(this[i]).on("click", (e) => {
       e.preventDefault();
+      const dataActive = $(e.target)
+        // $(this[i])
+        .closest("[data-active]")
+        .getAttr("data-active");
 
-      if ($(this[i]).hasAttr("data-hamburger")) {
+      // console.log(
+      //   $(e.target)
+      //     .closest("[data-active]")
+      //     .getAttr("data-active")
+      // );
+
+      if ($(this[i]).hasAttr("data-burger")) {
         $(targetId).show("block");
+
+        if (dataActive === "false") {
+          $(this[i]).setAttr("data-active", "true");
+        } else if (dataActive === "true") {
+          console.log(e.target);
+          $(this[i]).setAttr("data-active", "false");
+          // оптимизировать //
+          body.overflow = "";
+          body.paddingRight = 0;
+          $(targetId).hide();
+        }
       } else {
         $(targetId).show("flex");
       }
@@ -21,12 +42,19 @@ $.prototype.modal = function () {
     });
 
     $(targetId).on("click", (e) => {
+      console.log(e.target);
       closeTheModal(e, targetId);
     });
   }
 
   function closeTheModal(e, targetId) {
     if (e.target.hasAttribute("data-close")) {
+      // if (
+      //   $("[data-burger]").getAttr("data-active") == "true"
+      // ) {
+      //   $("[data-burger]").setAttr("data-active", "false");
+      //   // $("[data-burger]").removeAttr("data-close");
+      // }
       close();
       return;
     }
@@ -39,14 +67,9 @@ $.prototype.modal = function () {
     function close() {
       body.overflow = "";
       body.paddingRight = 0;
-      $(targetId).hide("none");
-      // console.log("click");
-
-      // $(targetId).off("click", (e) =>
-      //   closeTheModal(e, targetId)
-      // );
+      $(targetId).hide();
     }
   }
 };
 
-$("[data-open='modal']").modal();
+// $("[data-open='modal']").modal();

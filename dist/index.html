@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<script defer src="bundle.js"></script><link href="bundle.css" rel="stylesheet"></head>
+
+<body>
+
+  <header class="header">
+    <div class="container">
+      <div class="header__top">
+        <a href="#" class="header__logo">
+          <img src="img/header-logo.svg" alt="logo">
+        </a>
+        <!-- иконка бургер -->
+        <div class="header__burger burger" data-open="modal" data-target="#mobile-menu" data-active="false" data-burger>
+          <div class="burger__icon">
+            <span class="burger__line"></span>
+          </div>
+        </div>
+        <nav class="header__menu menu">
+          <ul class="menu__list">
+            <li class="menu__item">
+              <a href="#" class="menu__link">À la carte</a>
+            </li>
+            <li class="menu__item">
+              <a href="#" class="menu__link">Wijnkaart</a>
+            </li>
+            <li class="menu__item">
+              <a href="#" class="menu__link">Lunchmenu</a>
+            </li>
+            <li class="menu__item">
+              <a href="#" class="menu__link">Contact</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="header__phone">
+          <img src="img/header-phone.svg" alt="phone">
+          <a href="tel:+3292825725">+32 9 282 57 25</a>
+        </div>
+      </div>
+
+      <!-- serch -->
+      <div class="header__midl">
+        <!-- serch -->
+      </div>
+
+
+      <!-- <button class="btn btn__primary dropdown__toggle" id="dropdownMenuButton2">Dropdown button</button> -->
+
+    </div>
+  </header>
+
+  <div class="dropdown-menu">
+    <div class="container">
+
+    </div>
+  </div>
+
+  <div class="main pt-20">
+    <div class="container">
+
+      <!-- Card -->
+      <div class="main__goods d-flex f-space-around">
+        <div class="card">
+          <div class="card__header">
+            <img class="card__img"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMby4OK2LYKD6KqAUmMEXNKcHtZ3A_LZriDQ&usqp=CAU"
+              alt="photo">
+          </div>
+          <div class="card__body">
+            <div class="card__title">Card title</div>
+            <p class="card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia itaque placeat qui
+              suscipit.
+            </p>
+            <a href="#" class="btn btn__primary" data-open="modal" data-target="#exampleModal">Link to</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card__header">
+            <img class="card__img"
+              src="https://www.apple.com/newsroom/images/product/iphone/lifestyle/Apple_Shot-on-iPhone-Challenge-2020_Austin-Mann_01072020_big.jpg.large.jpg"
+              alt="photo">
+          </div>
+          <div class="card__body">
+            <div class="card__title">Card title #2</div>
+            <p class="card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia itaque placeat qui
+              suscipit.
+            </p>
+            <a href="#" class="btn btn__primary" data-open="modal" data-target="#form">Link to</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal exampleModal -->
+      <div class="modal" id="exampleModal">
+        <div class="modal__dialog">
+          <div class="modal__content">
+            <button class="modal__close btn btn__close" data-close>
+              &times;
+            </button>
+            <div class="modal__header">
+              <div class="modal__title">
+                Modal title exampleModal
+              </div>
+            </div>
+            <div class="modal__body">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum minus doloremque nesciunt enim rem quam
+              corporis?
+              Dolorem pariatur magnam distinctio perferendis. Ratione dolorem voluptates iusto facilis odit veritatis,
+              suscipit voluptatibus!
+            </div>
+            <div class="modal__footer">
+              <button class="modal__btn btn btn__danger" data-close>Close</button>
+              <button class="modal__btn btn btn__success">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal form -->
+      <!-- <div class="modal" id="form">
+        <div class="modal__dialog">
+          <div class="modal__content">
+            <div class="modal__header">
+              <h3 class="modal__title">
+                Modal title hamburger
+              </h3>
+              <button class="modal__close close" data-close>
+                &times;
+              </button>
+            </div>
+            <div class="modal__form form">
+              <input type="text">
+              <input type="phone">
+              <input type="email">
+              <button type="submit">submit</button>
+            </div> -->
+      <!-- <div class="modal__footer">
+              <button class="modal__btn btn btn__danger" data-close>Close</button>
+              <button class="modal__btn btn btn__success">Save changes</button>
+            </div> -->
+      <!-- </div>
+        </div>
+      </div> -->
+      <div class="modal" id="form">
+        <div class="modal__wrap">
+          <div class="modal__content">
+            <div class="modal__header">
+              <h3 class="modal__title">Have any questions?</h3>
+              <button class="modal__close btn btn__close" data-close>
+                &times;
+              </button>
+            </div>
+            <!-- form -->
+            <form class="modal__form form" action="send-mail.php" method="post" enctype="multipart/form-data">
+              <input type="text" name="name" placeholder="Input your name" required class="text__black"
+                data-reg="^[A-Z][a-z]*$">
+              <span></span>
+              <input type="email" name="email" placeholder="Input your email" required class="text__black"
+                data-reg="^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$">
+              <span></span>
+              <textarea name="message" placeholder="Input your special request" class="text__black"></textarea>
+              <button class="form__button text__black" type="submit">Send</button>
+              <div class="form__checkbox">
+                <input required type="checkbox">
+                <span>Я согласен(сна) с <a href="#">политикой конфиденциальности</a></span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <!-- Tabs -->
+
+      <div class="tab mt-20 block-center">
+        <div class="tab__panel" data-tabpanel>
+          <div class="tab__item tab__item-active" data-tab>Content 1</div>
+          <div class="tab__item" data-tab>Content 2</div>
+          <div class="tab__item" data-tab>Content 3</div>
+          <!-- <div class="dropdown">
+          <button class="btn btn__primary dropdown__toggle" id="dropdownMenuButton2">Dropdown button</button>
+          <div class="dropdown__menu" data-toggle-id="dropdownMenuButton2">
+            <a href="#" class="dropdown__item">Action</a>
+            <a href="#" class="dropdown__item">Action #2</a>
+            <a href="#" class="dropdown__item">Action #3</a>
+          </div>
+        </div>-->
+        </div>
+        <div class="tab__content tab__content-active" data-tabcontent>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat laboriosam blanditiis omnis? Ab molestias
+          tempora
+          beatae ex itaque cumque, velit modi, molestiae debitis earum dolor quae quis. Ipsum, omnis voluptatem!
+          <br> <br>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet voluptates ipsum delectus vitae similique earum
+          veniam? Odit soluta quibusdam laudantium molestias perferendis ad voluptates, earum ea deserunt architecto
+          provident
+          ipsum.
+        </div>
+        <div class="tab__content" data-tabcontent>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat laboriosam blanditiis omnis? Ab molestias
+          tempora
+          beatae ex itaque cumque, velit modi, molestiae debitis earum dolor quae quis. Ipsum, omnis voluptatem!
+          <br> <br>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet voluptates ipsum delectus vitae similique earum
+          veniam? Odit soluta quibusdam laudantium molestias perferendis ad voluptates, earum ea deserunt architecto
+          provident
+          ipsum.
+          <br> <br>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet voluptates ipsum delectus vitae similique earum
+          veniam? Odit soluta quibusdam laudantium molestias perferendis ad voluptates, earum ea deserunt architecto
+          provident
+          ipsum.
+        </div>
+        <div class="tab__content" data-tabcontent>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat laboriosam blanditiis omnis? Ab molestias
+          tempora
+          beatae ex itaque cumque, velit modi, molestiae debitis earum dolor quae quis. Ipsum, omnis voluptatem!
+        </div>
+      </div>
+
+      <div class="tab mt-10 block-center">
+        <div class="tab__panel" data-tabpanel>
+          <div class="tab__item tab__item-active" data-tab>Content 1</div>
+          <div class="tab__item" data-tab>Content 2</div>
+          <div class="tab__item" data-tab>Content 3</div>
+          <div class="tab__item" data-tab>Content 4</div>
+          <!-- <div class="dropdown">
+          <button class="btn btn__primary dropdown__toggle" id="dropdownMenuButton2">Dropdown button</button>
+          <div class="dropdown__menu" data-toggle-id="dropdownMenuButton2">
+            <a href="#" class="dropdown__item">Action</a>
+            <a href="#" class="dropdown__item">Action #2</a>
+            <a href="#" class="dropdown__item">Action #3</a>
+          </div>
+        </div>-->
+        </div>
+        <div class="tab__body">
+          <div class="tab__content tab__content-active" data-tabcontent>
+            88888888888888888888888
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet voluptates ipsum delectus vitae similique
+            earum
+            veniam? Odit soluta quibusdam laudantium molestias perferendis ad voluptates, earum ea deserunt architecto
+            provident
+            ipsum.
+          </div>
+
+          <div class="tab__content" data-tabcontent>
+            444444444444444444
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet voluptates ipsum delectus vitae similique
+            earum
+            veniam? Odit soluta quibusdam laudantium molestias perferendis ad voluptates, earum ea deserunt architecto
+            provident
+            ipsum.
+          </div>
+
+          <div class="tab__content" data-tabcontent>
+            111 beatae ex itaque cumque, velit modi, molestiae debitis earum dolor quae quis. Ipsum, omnis voluptatem!
+          </div>
+
+          <div class="tab__content" data-tabcontent>
+            22222 beatae ex itaque cumque, velit modi, molestiae debitis earum dolor quae quis. Ipsum, omnis voluptatem!
+          </div>
+        </div>
+      </div>
+
+      <!-- Accordion -->
+      <div class="accordion mt-20 block-center" id="accordion" data-accordion>
+        <div class="accordion__head" data-toggle-accordion>
+          <!-- <span data-toggle="accordion">Collapse first element</span> -->
+          <button class="accordion__btn btn btn__text" data-btn>Collapse first element</button>
+          <button class="accordion__btn btn btn__icon" data-btn>&times;</button>
+        </div>
+        <div class="accordion__content" data-content="false">
+          <div class="accordion__inner">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem voluptatibus fuga est cupiditate debitis
+            harum
+            repudiandae modi quia. Enim nobis recusandae totam error veniam quod consequatur nulla, debitis mollitia
+            laborum!
+          </div>
+        </div>
+        <div class="accordion__head" data-toggle-accordion>
+          <!-- <span data-toggle="accordion">Collapse second element</span> -->
+          <button class="accordion__btn btn btn__text" data-btn>Collapse second element</button>
+          <button class="accordion__btn btn btn__icon" data-btn>&times;</button>
+        </div>
+        <div class="accordion__content" data-content="false">
+          <div class="accordion__inner">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem voluptatibus fuga est cupiditate debitis
+            harum
+            repudiandae modi quia. Enim nobis recusandae totam error veniam quod consequatur nulla, debitis mollitia
+            laborum!
+          </div>
+        </div>
+        <div class="accordion__head" data-toggle-accordion>
+          <span>Collapse second element</span>
+          <button class="accordion__btn btn btn__icon" data-btn>&times;</button>
+        </div>
+        <div class="accordion__content" data-content="false">
+          <div class="accordion__inner">
+            Lorem ipsum dolor sit amet consectetur
+          </div>
+        </div>
+      </div>
+
+      <!-- slider -->
+      <div class="carousel mt-20 mb-20" data-carousel>
+        <ol class="carousel__indicators" data-indicators>
+          <li data-slide-to="0" class="active"></li>
+          <li data-slide-to="1"></li>
+          <li data-slide-to="2"></li>
+        </ol>
+        <div class="carousel__inner">
+          <div class="carousel__slides" data-slides>
+            <div class="carousel__item" data-slide>
+              <img src="https://ipiccy.com/res/template/img/hp_v2/pics/ba-01s3.jpg" alt="photo">
+            </div>
+            <div class="carousel__item" data-slide>
+              <img
+                src="https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?cs=srgb&dl=calm-body-of-water-1363876.jpg&fm=jpg"
+                alt="photo">
+            </div>
+            <div class="carousel__item" data-slide>
+              <img src="https://pixlr.com/images/best-photo-editor-cover.jpg" alt="photo">
+            </div>
+          </div>
+        </div>
+        <a href="#" class="carousel__prev" data-btn="prev">
+          <span class="carousel__prev-icon">&lt;</span>
+        </a>
+        <a href="#" class="carousel__next " data-btn="next">
+          <span class="carousel__next-icon">&gt;</span>
+        </a>
+        <!-- <button class="carousel__prev carousel__prev-icon" data-slide="prev">&lt;</button>
+      <button class="carousel__next carousel__next-icon" data-slide="next">&gt;</button> -->
+      </div>
+
+      <!-- slider 2 -->
+      <div class="carousel mt-10 mb-10" data-carousel>
+        <ol class="carousel__indicators" data-indicators>
+          <li class="active" data-slide-to="0"></li>
+          <li data-slide-to="1"></li>
+          <li data-slide-to="2"></li>
+        </ol>
+        <div class="carousel__inner">
+          <div class="carousel__slides" data-slides>
+            <div class="carousel__item" data-slide>
+              <img src="https://ipiccy.com/res/template/img/hp_v2/pics/ba-01s3.jpg" alt="photo">
+            </div>
+            <div class="carousel__item" data-slide>
+              <img
+                src="https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?cs=srgb&dl=calm-body-of-water-1363876.jpg&fm=jpg"
+                alt="photo">
+            </div>
+            <div class="carousel__item" data-slide>
+              <img src="https://pixlr.com/images/best-photo-editor-cover.jpg" alt="photo">
+            </div>
+          </div>
+        </div>
+        <a href="#" class="carousel__prev" data-btn="prev">
+          <span class="carousel__prev-icon">&lt;</span>
+        </a>
+        <a href="#" class="carousel__next " data-btn="next">
+          <span class="carousel__next-icon">&gt;</span>
+        </a>
+        <!-- <button class="carousel__prev carousel__prev-icon" data-slide="prev">&lt;</button>
+      <button class="carousel__next carousel__next-icon" data-slide="next">&gt;</button> -->
+      </div>
+
+
+      <button class="btn btn__danger btn__autoflash" data-fadeToggle>click me</button>
+
+      <!-- checkbox -->
+      <label for="form-check1" class="checkbox mt-20 mb-20">
+        <input required type="checkbox" class="checkbox__real" id="form-check1">
+        <span class="checkbox__custom"></span>
+        <span>Я согласен(сна) с <a href="#">политикой конфиденциальности</a></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- form -->
+  <section class="contacts">
+    <div class="container">
+      <div class="contacts__content">
+        <h3 class="contacts__title">Have any questions?</h4>
+          <!-- form -->
+          <form class="contacts__form form" method="post" enctype="multipart/form-data" data-form>
+            <input type="text" name="name" placeholder="Input your name" required class="form__name"
+              data-reg="^[A-Z][a-z]*$">
+            <span data-span></span>
+            <input type="email" name="email" placeholder="Input your email" required class="form__email"
+              data-reg="^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$">
+            <span data-span></span>
+            <input type="phone" name="phone" placeholder="+7 (999) 999 99 99" required class="form__phone"
+              data-reg="^\7\d{10}$">
+            <span id="contacts-phone"></span>
+            <textarea name="message" placeholder="Input your special request" required class="form__text"></textarea>
+            <button class="form__button btn btn__submit btn__autoflash" type="submit">Send</button>
+            <div class="form__policy">
+              <!-- <div class="checkbox"> -->
+
+              <label for="form-check" class="checkbox">
+                <input required type="checkbox" class="checkbox__real" id="form-check">
+                <span class="checkbox__custom"></span>
+                <span>Я согласен(сна) с <a href="#">политикой конфиденциальности</a></span>
+              </label>
+              <!-- </div> -->
+              <!-- <span>Я согласен(сна) с <a href="#">политикой конфиденциальности</a></span> -->
+            </div>
+          </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="info">
+    <div class="container">
+      <div class="info__content">
+        <h3 class="info__title">Have any questions?</h4>
+          <!-- form -->
+          <form class="info__form form" action="mail.php" method="post" enctype="multipart/form-data" data-form>
+            <input type="text" name="name" placeholder="Input your name" required class="form__name"
+              data-reg="^[А-ЯЁ][а-яё]*$" data-label="#name">
+            <span id="name"></span>
+            <input type="email" name="email" placeholder="Input your email" required class="form__email"
+              data-reg="^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$" data-label="#email">
+            <span id="email"></span>
+            <!-- <input type="phone" name="phone" placeholder="+7 (999) 999 99 99" required class="form__phone"
+              data-reg="^\d{11}$" data-label="#phone"> -->
+            <input type="phone" name="phone" placeholder="+7 (999) 999 99 99" required class="form__phone"
+              data-reg="^\d{11}$" data-label="#phone">
+            <span id="phone"></span>
+            <textarea name="message" placeholder="Input your special request" required class="form__text"></textarea>
+            <button class="form__button btn btn__submit" type="submit">Send</button>
+            <div class="form__policy">
+              <input required type="checkbox" class="form__checkbox">
+              <span>Я согласен(сна) с <a href="#">политикой конфиденциальности</a></span>
+            </div>
+          </form>
+      </div>
+    </div>
+  </section>
+
+  <button id="btn-submit" class="btn btn__submit">Click mi submit</button>
+
+  <!-- <svg class="icon">
+      <use xlink:href="./img/sprite/sprite.svg#circle"></use>
+    </svg> -->
+
+</body>
+
+</html>
+
+<!-- <script>
+
+  $('#rec234286614 .tn-elem[data-elem-id="1600548304926"] .tn-atom').addClass('autoflash').append('<div class="flash lighting" style="height: 75px;width: 40px;top: 0px;left: -20px;"></div>');
+</script>
+
+<style>
+  .autoflash {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .flash {
+    content: "";
+    background-color: rgba(70, 62, 179, 1);
+    height: 100%;
+    width: 3em;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -4.5em;
+    -webkit-transform: skewX(-45deg) translateX(0);
+    transform: skewX(-45deg) translateX(0);
+    -webkit-transition: none;
+    transition: none;
+  }
+
+  .lighting {
+    webkit-animation: moving 3s ease-in-out infinite;
+    -moz-animation: moving 3s ease-in-out infinite;
+    -ms-animation: moving 3s ease-in-out infinite;
+    -o-animation: moving 3s ease-in-out infinite;
+    animation: moving 3s ease-in-out infinite;
+
+  }
+
+  @keyframes moving {
+    30% {
+      webkit-transform: skewX(-45deg) translateX(33.5em);
+      transform: skewX(-45deg) translateX(33.5em);
+
+    }
+
+    100% {
+      webkit-transform: skewX(-45deg) translateX(33.5em);
+      transform: skewX(-45deg) translateX(33.5em);
+
+    }
+  }
+</style> -->

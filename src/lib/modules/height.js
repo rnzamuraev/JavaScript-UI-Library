@@ -1,37 +1,44 @@
 import $ from "../core";
+import { _content } from "../services/_content";
+import { _errElements } from "../services/_error";
 
-// $.prototype.width = function (value) {
-//   for (let i = 0; i < this.length; i++) {
-//     if (!this[i].style) {
-//       continue;
-//     }
-
-//     console.log((this[i].style.width = value));
-//     this[i].style.width = value;
-//   }
-
-//   return this;
-// };
-
-$.prototype.height = function (value) {
+$.prototype.height = function (content) {
   for (let i = 0; i < this.length; i++) {
     if (!this[i].style) {
       continue;
     }
 
-    this[i].style.height = value;
+    if (content !== "" && !content) {
+      _errElements(this, "height");
+      return window.getComputedStyle(this[i]).height;
+    }
+
+    this[i].style.height = _content(
+      content,
+      this[i].style.height
+    );
   }
 
   return this;
 };
 
-$.prototype.maxHeight = function (value) {
+$.prototype.maxHeight = function (content) {
   for (let i = 0; i < this.length; i++) {
     if (!this[i].style) {
       continue;
     }
 
-    this[i].style.maxHeight = value;
+    if (content !== "" && !content) {
+      _errElements(this, "height");
+      return window.getComputedStyle(this[i]).maxHeight;
+    }
+
+    this[i].style.maxHeight = _content(
+      content,
+      this[i].style.maxHeight
+    );
+
+    // this[i].style.maxHeight = value;
   }
 
   return this;

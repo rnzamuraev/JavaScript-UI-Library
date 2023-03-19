@@ -1,64 +1,5 @@
 import $ from "../core";
 
-// html
-// $.prototype.html = function (content) {
-//   console.log(content);
-//   for (let i = 0; i < this.length; i++) {
-//     if (!content) {
-//       return this[i].innerHTML;
-//     }
-
-//     if (content === " ") {
-//       console.log(content);
-//       this[i].innerHTML = "";
-//     } else {
-//       this[i].innerHTML = content;
-//     }
-//   }
-//   return this;
-// };
-
-// $.prototype.text = function (content) {
-//   console.log(content);
-//   for (let i = 0; i < this.length; i++) {
-//     if (!content) {
-//       return this[i].innerHTML;
-//     }
-
-//     if (content === " ") {
-//       console.log(content);
-//       this[i].textContent = "";
-//     } else {
-//       this[i].textContent = content;
-//     }
-//   }
-//   return this;
-// };
-
-// // value
-// $.prototype.val = function (content) {
-//   for (let i = 0; i < this.length; i++) {
-//     if (!content) {
-//       return this[i].value;
-//     }
-
-//     if (content == " ") {
-//       this[i].value = "";
-//     } else {
-//       this[i].value = content;
-//     }
-//   }
-//   return this;
-// };
-
-// length
-// $.prototype.leng = function () {
-//   for (let i = 0; i < this.length; i++) {
-//     return this[i].value.length;
-//   }
-//   // return this;
-// };
-
 // eq - находит елемент по указанному индексу
 $.prototype.eq = function (ind) {
   if (!ind && ind !== 0) {
@@ -137,7 +78,6 @@ $.prototype.find = function (selector) {
       // console.log(arr[i][j]);
       // console.log(j);
     }
-    console.log(this);
   }
   // console.log(this);
   // console.log(counter);
@@ -307,7 +247,7 @@ $.prototype.nextSibling = function () {
 };
 
 // parent - получает родительский элемент
-$.prototype.parent = function (node) {
+$.prototype.parent = function () {
   if (this.length > 1) {
     throw new Error(
       `
@@ -319,15 +259,15 @@ $.prototype.parent = function (node) {
 
   // console.log(this);
   // console.log(this[0].parentNode);
-  if (!node) {
-    for (let i = 0; i < this.length; i++) {
-      this[i] = this[i].parentNode;
-    }
-  } else {
-    for (let i = 0; i < node.length; i++) {
-      this[i] = node[i].parentNode;
-    }
+  // if (!node) {
+  for (let i = 0; i < this.length; i++) {
+    this[i] = this[i].parentNode;
   }
+  // } else {
+  //   for (let i = 0; i < node.length; i++) {
+  //     this[i] = node[i].parentNode;
+  //   }
+  // }
 
   console.log(this);
   return this;

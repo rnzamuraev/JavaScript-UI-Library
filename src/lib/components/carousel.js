@@ -92,4 +92,4 @@ $.prototype.carousel = function (unit = "rem") {
   }
 };
 
-$("[data-carousel]").carousel();
+// $("[data-carousel]").carousel();

@@ -1,18 +1,22 @@
 import $ from "../core";
+import { _content } from "../services/_content";
+import { _errElements } from "../services/_error";
 
-$.prototype.width = function (value) {
+$.prototype.width = function (content) {
   for (let i = 0; i < this.length; i++) {
     if (!this[i].style) {
       continue;
     }
 
-    if (!value) {
-      console.log(window.getComputedStyle(this[i]).width);
-      this[i] = window.getComputedStyle(this[i]).width;
-    } else {
-      // console.log((this[i].style.width = value));
-      this[i].style.width = value;
+    if (content !== "" && !content) {
+      _errElements(this, "width");
+      return window.getComputedStyle(this[i]).width;
     }
+
+    this[i].style.width = _content(
+      content,
+      this[i].style.width
+    );
   }
 
   return this;

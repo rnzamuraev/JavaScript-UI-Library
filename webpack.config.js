@@ -72,6 +72,14 @@ module.exports = {
           ),
           to: path.resolve(__dirname, "dist/img"),
         },
+        {
+          from: path.resolve(
+            __dirname,
+            "src",
+            "img/icons/"
+          ),
+          to: path.resolve(__dirname, "dist/img/"),
+        },
       ],
     }),
     // minify: {
