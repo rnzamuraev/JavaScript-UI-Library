@@ -1,19 +1,18 @@
 import $ from "../core";
+// import { _getValue, _setValue } from "../services/_switchValue";
 import { _content } from "../services/_content";
-import { _errElements } from "../services/_error";
+import { _errThisElements } from "../services/_error";
 
 // html
 $.prototype.html = function (content) {
   for (let i = 0; i < this.length; i++) {
     if (content !== "" && !content) {
-      _errElements(this, "html");
+      _errThisElements(this, "html");
+
       return this[i].innerHTML;
     }
 
-    this[i].innerHTML = _content(
-      content,
-      this[i].innerHTML
-    );
+    this[i].innerHTML = _content(content);
   }
 
   return this;
@@ -23,14 +22,11 @@ $.prototype.html = function (content) {
 $.prototype.text = function (content) {
   for (let i = 0; i < this.length; i++) {
     if (content !== "" && !content) {
-      _errElements(this, "text");
-      return this[i].innerHTML;
+      _errThisElements(this, "text");
+      return this[i].textContent;
     }
 
-    this[i].textContent = _content(
-      content,
-      this[i].textContent
-    );
+    this[i].textContent = _content(content);
   }
 
   return this;
@@ -38,15 +34,13 @@ $.prototype.text = function (content) {
 
 // value
 $.prototype.val = function (content) {
-  _err(this, "val");
-
   for (let i = 0; i < this.length; i++) {
     if (content !== "" && !content) {
-      _errElements(this, "val");
+      _errThisElements(this, "val");
       return this[i].value;
     }
 
-    this[i].value = _content(content, this[i].value);
+    this[i].value = _content(content);
   }
 
   return this;

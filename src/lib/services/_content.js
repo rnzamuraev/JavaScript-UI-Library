@@ -1,4 +1,6 @@
-export function _content(content, value) {
+export function _content(content) {
+  let value;
+
   if (content === "") {
     value = "";
   } else {

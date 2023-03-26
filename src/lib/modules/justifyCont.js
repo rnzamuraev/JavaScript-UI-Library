@@ -2,7 +2,7 @@ import $ from "../core";
 import { _errThisElements } from "../services/_error";
 import { _content } from "../services/_content";
 
-$.prototype.transition = function (value) {
+$.prototype.justifyCont = function (value) {
   _errThisElements(this, "transition");
   console.log(this);
   console.log(value);

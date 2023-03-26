@@ -1,6 +1,6 @@
 import $ from "../core";
 import { _content } from "../services/_content";
-import { _errElements } from "../services/_error";
+import { _errThisElements } from "../services/_error";
 
 $.prototype.height = function (content) {
   for (let i = 0; i < this.length; i++) {
@@ -9,14 +9,11 @@ $.prototype.height = function (content) {
     }
 
     if (content !== "" && !content) {
-      _errElements(this, "height");
+      _errThisElements(this, "height");
       return window.getComputedStyle(this[i]).height;
     }
 
-    this[i].style.height = _content(
-      content,
-      this[i].style.height
-    );
+    this[i].style.height = _content(content, this[i].style.height);
   }
 
   return this;
@@ -29,14 +26,11 @@ $.prototype.maxHeight = function (content) {
     }
 
     if (content !== "" && !content) {
-      _errElements(this, "height");
+      _errThisElements(this, "height");
       return window.getComputedStyle(this[i]).maxHeight;
     }
 
-    this[i].style.maxHeight = _content(
-      content,
-      this[i].style.maxHeight
-    );
+    this[i].style.maxHeight = _content(content, this[i].style.maxHeight);
 
     // this[i].style.maxHeight = value;
   }

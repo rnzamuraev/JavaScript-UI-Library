@@ -1,8 +1,17 @@
 import $ from "../core";
+import {
+  _errThisElements,
+  _errThisUndefined,
+  _errThisNotTagName,
+  _errArgUndefined,
+  _errArgNotTagName,
+  _errArgNotSelector,
+  _errArg,
+} from "../services/_error";
 
 // eq - находит елемент по указанному индексу
 $.prototype.eq = function (ind) {
-  if (!ind && ind !== 0) {
+  if ((!ind && ind !== 0) || ind !== Number) {
     throw new Error(
       `
       - Что-то пошло не так, такого индекса нет, __eq__ (${ind})
@@ -25,38 +34,35 @@ $.prototype.eq = function (ind) {
 
 // index - находит индекс элемента на котором было совершено действие
 $.prototype.index = function () {
-  const parent = this[0].parentNode;
-  // const childs = [...parent.children];
-  const childs = parent.children;
+  _errThisElements(this, "index");
+  _errThisUndefined(this[0], "index");
 
-  // const findMyIndex = (elem) => {
-  //   return elem == this[0];
-  // };
+  for (let i = 0; i < this.length; i++) {
+    const parent = this[i].parentNode;
+    const childs = parent.children;
 
-  const findMyIndex = (elem) => {
-    for (let i = 0; i < childs.length; i++) {
-      if (childs[i] == elem) {
-        return i;
+    const findMyIndex = (elem) => {
+      for (let j = 0; j < childs.length; j++) {
+        if (childs[j] == elem) {
+          return j;
+        }
       }
-    }
-  };
+    };
 
-  // return childs.findIndex(findMyIndex);
-  return findMyIndex(this[0]);
+    // return childs.findIndex(findMyIndex);
+    return findMyIndex(this[i]);
+  }
 };
 
 // find - получает все дочерние элементы по заданному селуктору
 $.prototype.find = function (selector) {
-  if (!selector) {
-    throw new Error(
-      `
-      - Что-то пошло не так, селектор небыл передан, __find__ (${selector})
-      - Selector failed, __find__ (${selector})
-    `
-    );
-  }
-  // console.log(selector);
-  // console.log(this);
+  console.log(this);
+  console.log(selector);
+  _errThisElements(this, "find");
+  _errThisUndefined(this[0], "find");
+  _errArgUndefined(selector, "find");
+  _errArgNotSelector(selector, "find");
+
   let counter = 0;
   let arr = [];
 
@@ -66,6 +72,7 @@ $.prototype.find = function (selector) {
     delete this[i];
     arr[i] = copiObj[i].querySelectorAll(selector);
     // console.log(arr);
+    console.log(arr[i]);
 
     if (arr[i].length == 0) {
       continue;
@@ -91,48 +98,6 @@ $.prototype.find = function (selector) {
   console.log(this);
   return this;
 };
-
-// find
-// $.prototype.find = function (selector) {
-//   let numberOfIndex = 0;
-//   let counter = 0;
-
-//   const copiObj = Object.assign({}, this);
-//   // console.log(copiObj);
-
-//   for (let i = 0; i < copiObj.length; i++) {
-//     // delete this[i];
-//     const arr = copiObj[i].querySelectorAll(selector);
-//     console.log(arr);
-
-//     if (arr.length == 0) {
-//       continue;
-//     }
-
-//     console.log(arr.length);
-//     for (let j = 0; j < arr.length; j++) {
-//       this[counter] = arr[j];
-//       counter++;
-//       // console.log(arr[j]);
-//     }
-//     // console.log(this);
-//     numberOfIndex += arr.length;
-//     console.log(numberOfIndex);
-//   }
-//   console.log(this);
-//   console.log(counter);
-//   console.log(numberOfIndex);
-//   this.length = numberOfIndex;
-//   console.log(this.length);
-//   const objLength = Object.keys(this).length;
-//   for (; numberOfIndex < objLength; numberOfIndex++) {
-//     delete this[numberOfIndex];
-//   }
-
-//   // this.length = counter;
-//   console.log(this);
-//   return this;
-// };
 
 // closest - находит ближайший родительский контайнер по указанному селектору,
 // или сам элемент если он подходит по селектору, возвращает первыйнайденный контайнер
@@ -204,14 +169,15 @@ $.prototype.siblings = function () {
 
 // prevSibling - находит элемент стоящий перед применяемым
 $.prototype.prevSibling = function () {
-  if (this.length > 1) {
-    throw new Error(
-      `
-        - Что-то пошло не так, передано более 1 элемента, __prevSibling__ (${this})
-        - Received more than 1 element node, __prevSibling__ (${this})
-      `
-    );
-  }
+  _errThisElements(this, "prevSibling");
+  // if (this.length > 1) {
+  //   throw new Error(
+  //     `
+  //       - Что-то пошло не так, передано более 1 элемента, __prevSibling__ (${this})
+  //       - Received more than 1 element node, __prevSibling__ (${this})
+  //     `
+  //   );
+  // }
 
   for (let i = 0; i < this.length; i++) {
     this[i] = this[i].previousElementSibling;
@@ -226,14 +192,15 @@ $.prototype.prevSibling = function () {
 
 // hextSibling - находит элемент стоящий после применяемого
 $.prototype.nextSibling = function () {
-  if (this.length > 1) {
-    throw new Error(
-      `
-        - Что-то пошло не так, передано более 1 элемента, __nextSibling__ (${this})
-        - Received more than 1 element node, __nextSibling__ (${this})
-      `
-    );
-  }
+  _errThisElements(this, "nextSibling");
+  // if (this.length > 1) {
+  //   throw new Error(
+  //     `
+  //       - Что-то пошло не так, передано более 1 элемента, __nextSibling__ (${this})
+  //       - Received more than 1 element node, __nextSibling__ (${this})
+  //     `
+  //   );
+  // }
 
   for (let i = 0; i < this.length; i++) {
     this[i] = this[i].nextElementSibling;
@@ -248,14 +215,15 @@ $.prototype.nextSibling = function () {
 
 // parent - получает родительский элемент
 $.prototype.parent = function () {
-  if (this.length > 1) {
-    throw new Error(
-      `
-      - Что-то пошло не так, передано более 1 элемента, __parent__ (${this})
-      - Received more than 1 element node, __parent__ (${this})
-    `
-    );
-  }
+  _errThisElements(this, "parent");
+  // if (this.length > 1) {
+  //   throw new Error(
+  //     `
+  //     - Что-то пошло не так, передано более 1 элемента, __parent__ (${this})
+  //     - Received more than 1 element node, __parent__ (${this})
+  //   `
+  //   );
+  // }
 
   // console.log(this);
   // console.log(this[0].parentNode);
@@ -275,15 +243,8 @@ $.prototype.parent = function () {
 
 // children - находит всех детей заданного елемента или
 $.prototype.children = function () {
-  console.log(this);
-  if (this.length > 1) {
-    throw new Error(
-      `
-        - Что-то пошло не так, передано более 1 элемента, __children__ (${this})
-        - Received more than 1 element node, __children__ (${this})
-      `
-    );
-  }
+  _errThisElements(this, "children");
+  _errThisUndefined(this[0], "children");
 
   let counter = 0;
   const arr = [];
@@ -312,9 +273,36 @@ $.prototype.children = function () {
   return this;
 };
 
+$.prototype.firstChild = function () {
+  _errThisElements(this, "firstChild");
+  _errThisUndefined(this[0], "lastChild");
+
+  for (let i = 0; i < this.length; i++) {
+    console.log(this[i]);
+    this[i] = this[i].firstElementChild;
+    // console.log(this[i].lastElementChild);
+  }
+
+  console.log(this);
+  return this;
+};
+
+$.prototype.lastChild = function () {
+  _errThisElements(this, "lastChild");
+  _errThisUndefined(this[0], "lastChild");
+
+  for (let i = 0; i < this.length; i++) {
+    console.log(this[i]);
+    this[i] = this[i].lastElementChild;
+    // console.log(this[i].lastElementChild);
+  }
+
+  console.log(this);
+  return this;
+};
+
 // create
 $.prototype.create = function (node) {
-  console.log(node);
   console.log(node);
   if (!node && createElement == node.tagName) {
     return this;
@@ -330,22 +318,68 @@ $.prototype.create = function (node) {
   return this;
 };
 
-// parentAppend
+// parentAppend;
 $.prototype.parentAppend = function (parent) {
-  if (parent.length == 0) {
-    console.log("!parent.length");
-    return this;
+  console.log(this);
+  console.log(parent);
+
+  _errThisElements(this, "parentAppend");
+  _errThisUndefined(this[0], "parentAppend");
+
+  for (let i = 0; i < this.length; i++) {
+    _errThisNotTagName(this[i], "parentAppend");
+
+    for (let j = 0; j < parent.length; j++) {
+      if (typeof parent[j] === "object" && !parent[j].tagName) {
+        _append(this[i], parent[j][i]);
+      } else if (typeof parent[j] === "object" && parent[j].tagName) {
+        _append(this[i], parent[j]);
+      } else {
+        _errArgUndefined(parent[j], "parentAppend");
+        _errArgNotTagName(parent[j], "parentAppend");
+      }
+
+      function _append(elem, arg) {
+        if (!arg.appendChild) {
+          arg.appendChild(elem);
+        } else {
+          arg.append(elem);
+        }
+      }
+    }
   }
 
-  for (let i = 0; i < parent.length; i++) {
-    if (!parent[i].tagName) {
-      continue;
-    }
+  return this;
+};
 
-    if (parent[i].appendChild) {
-      parent[i].appendChild(this[0]);
-    } else {
-      parent[i].append(this[0]);
+// append;
+$.prototype.append = function (...child) {
+  console.log(this);
+  console.log(...child);
+
+  _errThisElements(this, "append");
+  _errThisUndefined(this[0], "append");
+
+  for (let i = 0; i < this.length; i++) {
+    // _errThisNotTagName(this[i], "append");
+
+    for (let j = 0; j < child.length; j++) {
+      if (typeof child[j] === "object" && !child[j].tagName) {
+        _append(this[i], child[j][i]);
+      } else if (typeof child[j] === "object" && child[j].tagName) {
+        _append(this[i], child[j]);
+      } else {
+        _errArgUndefined(child[j], "append");
+        _errArgNotTagName(child[j], "append");
+      }
+
+      function _append(elem, arg) {
+        if (!elem.appendChild) {
+          elem.appendChild(arg);
+        } else {
+          elem.append(arg);
+        }
+      }
     }
   }
 
@@ -386,47 +420,5 @@ $.prototype.parentAppend = function (parent) {
 //   }
 
 //   console.log(this);
-//   return this;
-// };
-
-// $.prototype.append = function (...child) {
-//   const arr = [...child];
-//   const newArr = [];
-//   console.log(arr);
-
-//   for (let i = 0; i < arr.length; i++) {
-//     console.log(arr[i]);
-//     console.log(typeof arr[i]);
-//     if (arr[i].tagName) {
-//       console.log("hello 2");
-//     } else if (
-//       typeof arr[i] == "object" &&
-//       arr[i] !== null &&
-//       !arr[i].tagName
-//     ) {
-//       console.log("hello");
-//     } else {
-//       console.log("continue");
-//       continue;
-//     }
-//   }
-
-//   if (parent.length == 0) {
-//     console.log("!parent.length");
-//     return this;
-//   }
-
-//   for (let i = 0; i < parent.length; i++) {
-//     if (!parent[i].tagName) {
-//       continue;
-//     }
-
-//     if (parent[i].appendChild) {
-//       parent[i].appendChild(this[0]);
-//     } else {
-//       parent[i].append(this[0]);
-//     }
-//   }
-
 //   return this;
 // };

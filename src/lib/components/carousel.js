@@ -1,4 +1,5 @@
 import $ from "../core";
+import getWidthInUnit from "../modules/getWidthInUnit";
 
 $.prototype.carousel = function (unit = "rem") {
   for (let i = 0; i < this.length; i++) {
@@ -10,24 +11,17 @@ $.prototype.carousel = function (unit = "rem") {
     const slidesWrap = $(this[i]).find("[data-slides]");
 
     const width = window
-      .getComputedStyle(
-        this[i].querySelector("[data-slides]")
-      )
+      .getComputedStyle(this[i].querySelector("[data-slides]"))
       .width.replace(/\D/g, "");
+    const widthUnit = $().getWidthInUnit(width, unit);
     let slideIndex = 0;
     // const translate = -((width * slideIndex) / 16) + unit;
     // console.log(translate);
 
-    slidesWrap.width(100 * +slides.length + "%");
+    slidesWrap.style("width", `100 * ${+slides.length}%`);
 
     for (let i = 0; i < slides.length; i++) {
-      console.log(slides[i]);
-      if (unit !== "px") {
-        $(slides[i]).width(width / 16 + unit);
-        console.log(slides[i]);
-      } else {
-        $(slides[i]).width(width + unit);
-      }
+      $(slides[i]).style("width", widthUnit);
     }
 
     btnPrev.on("click", (e) => prevSlide(e));
@@ -65,17 +59,13 @@ $.prototype.carousel = function (unit = "rem") {
     }
 
     function changeSlide() {
-      slidesWrap.transform(
-        `translateX(-${(width * slideIndex) / 16}${unit})`
-      );
+      slidesWrap.style("transform", `translateX(-${(width * slideIndex) / 16}${unit})`);
     }
 
     function changeDot() {
       dots.removeClass("active");
       for (let i = 0; i < dots.length; i++) {
-        if (
-          $(dots[i]).getAttr("data-slide-to") == slideIndex
-        ) {
+        if ($(dots[i]).getAttr("data-slide-to") == slideIndex) {
           $(dots[i]).addClass("active");
         }
       }

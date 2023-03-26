@@ -89,7 +89,7 @@ $.prototype.form = function (phpFile) {
         //     label.html(" ");
         //   }
         if (e.type === "focus") {
-          label.html(" ");
+          label.html("");
         } else if (e.type == "blur") {
           regTestInput(e, reg, inputValue, label);
         }
@@ -101,12 +101,12 @@ $.prototype.form = function (phpFile) {
     function regTestInput(e, reg, inputValue, label) {
       if (reg.test(inputValue)) {
         $(e.target).setAttr("is-valid", "1");
-        label.html(" ");
+        label.html("");
       } else {
         $(e.target).setAttr("is-valid", "0");
         label.html("Не верно заполнено поле");
         if (e.target.value === "") {
-          label.html(" ");
+          label.html("");
         }
       }
     }

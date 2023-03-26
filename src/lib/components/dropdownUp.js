@@ -1,4 +1,5 @@
 import $ from "../core";
+// import getWidthInUnit from "../modules/getWidthInUnit";
 
 $.prototype.dropdownUp = function (unit = "px", display = "") {
   for (let i = 0; i < this.length; i++) {
@@ -57,24 +58,18 @@ $.prototype.dropdownUp = function (unit = "px", display = "") {
     // Получаем высоту drop-menu
     function getHeight(elem) {
       console.log(elem);
+      console.log(elem.style("scrollHeight"));
       const height = elem.scrollHeight();
-      // const height = $(elem).find("[data-menu]").scrollHeight();
       console.log(height);
-      let val;
-
-      if (unit !== "px") {
-        val = height / 16 + unit;
-      } else {
-        val = height + unit;
-      }
-
-      return val;
+      const heightUnit = $().getWidthInUnit(height, unit);
+      console.log(heightUnit);
+      return heightUnit;
     }
 
     // Открываем dropdown
     function openDropdown(elem) {
       toggle.setAttr("data-toggle-drop", "true");
-
+      console.log(elem);
       checkDataActive(`#${id}`, "true", getHeight(elem));
     }
 
@@ -88,8 +83,7 @@ $.prototype.dropdownUp = function (unit = "px", display = "") {
     // Проверяем на наличие активного елемент
     function checkDataActive(elem, check, maxHeight = "0") {
       if ($(elem).hasAttr("data-active")) {
-        $(elem).setAttr("data-active", check);
-        $(elem).maxHeight(maxHeight);
+        $(elem).setAttr("data-active", check).style("maxHeight", maxHeight);
         // console.log(elem);
         // console.log($(elem));
         // console.log(maxHeight);

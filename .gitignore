@@ -1,6 +1,7 @@
 node_modules
 dist
 private
+src/pages
 src/css
 src/img
 src/js

@@ -4,13 +4,15 @@ $.prototype.search = function () {
   for (let i = 0; i < this.length; i++) {
     const input = $(this[i]).find("[data-input-search]");
     const clear = $(this[i]).find("[data-clear-search]");
+    const toggle = $(this[i]).find("[data-toggle-search]");
 
-    $(this[i])
-      .find("[data-toggle-search]")
-      .on("click", () => {
+    toggle.on("click", () => {
+      if (input.valLength() <= 0) {
         clear.hide();
-        $(this[i]).toggleClass("active");
-      });
+      }
+
+      $(this[i]).toggleClass("active");
+    });
 
     input.on("input", () => {
       if (input.valLength() >= 1) {
@@ -21,7 +23,7 @@ $.prototype.search = function () {
     });
 
     clear.on("click", () => {
-      input.val(" ");
+      input.val("");
       clear.hide();
     });
   }

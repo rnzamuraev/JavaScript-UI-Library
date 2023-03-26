@@ -25,7 +25,7 @@ $.prototype.mobileMenu = function () {
         //   .setAttr("data-active", "false");
         // console.log("click");
         menu.setAttr("data-active", "false");
-        $("body").overflow(" ");
+        $("body").style("overflow", "");
         btnBurger.setAttr("data-active", "false");
         console.log($(this[i]).find("[data-menu]"));
         // dropmenu.hide();
@@ -47,11 +47,11 @@ $.prototype.mobileMenu = function () {
     function menuToggle() {
       if (menu.getAttr("data-active") === "false") {
         menu.setAttr("data-active", "true");
-        $("body").overflow("hidden");
+        $("body").style("overflow", "hidden");
         // $("body").overflow();
       } else {
         menu.setAttr("data-active", "false");
-        $("body").overflow("");
+        $("body").style("overflow", "");
         // dropmenu.hide();
         dropClose();
       }
@@ -63,7 +63,7 @@ $.prototype.mobileMenu = function () {
       for (let i = 0; i < allToggle.length; i++) {
         $(allToggle[i]).setAttr("data-toggle-drop", "false");
       }
-      dropmenu.maxHeight("0");
+      dropmenu.style("maxHeight", "0");
     }
   }
 };

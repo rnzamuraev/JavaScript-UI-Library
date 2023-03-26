@@ -1,3 +1,4 @@
+import { _errArgNotSelector } from "./services/_error";
 const $ = function (selector) {
   return new $.prototype.init(selector);
 };
@@ -18,14 +19,15 @@ $.prototype.init = function (selector) {
   Object.assign(this, document.querySelectorAll(selector));
   this.length = document.querySelectorAll(selector).length;
 
-  if (this.length == 0) {
-    throw new Error(
-      `
-      - Что-то пошло не так, такого селектора не существует, $(${selector})
-      - No such selector exists, $(${selector})
-      `
-    );
-  }
+  _errArgNotSelector(selector, "$");
+  // if (this.length == 0) {
+  //   throw new Error(
+  //     `
+  //     - Что-то пошло не так, такого селектора не существует, $(${selector})
+  //     - No such selector exists, ${$}(${selector})
+  //     `
+  //   );
+  // }
 
   return this;
 };

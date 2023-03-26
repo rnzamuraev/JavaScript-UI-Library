@@ -1,6 +1,9 @@
 import $ from "../core";
+import { _errThisElements } from "../services/_error";
 
 $.prototype.transform = function (value) {
+  _errThisElements(this, "transform");
+
   console.log(this);
   console.log(value);
   for (let i = 0; i < this.length; i++) {
@@ -15,19 +18,14 @@ $.prototype.transform = function (value) {
       return this;
     }
 
-    console.log(value);
-    this[i].style.transform = value;
-    console.log(this[i]);
+    if (value === "") {
+      this[i].style.transform = "";
+    } else {
+      console.log(value);
+      this[i].style.transform = value;
+    }
   }
-  console.log(this);
 
-  //  if (!selector) {
-  //    throw new Error(
-  //      `
-  //     - Что-то пошло не так, селектор небыл передан, __find__ (${selector})
-  //     - Selector failed, __find__ (${selector})
-  //   `
-  //    );
-  //  }
+  console.log(this);
   return this;
 };

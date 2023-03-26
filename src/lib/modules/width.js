@@ -1,6 +1,6 @@
 import $ from "../core";
 import { _content } from "../services/_content";
-import { _errElements } from "../services/_error";
+import { _errThisElements } from "../services/_error";
 
 $.prototype.width = function (content) {
   for (let i = 0; i < this.length; i++) {
@@ -9,14 +9,11 @@ $.prototype.width = function (content) {
     }
 
     if (content !== "" && !content) {
-      _errElements(this, "width");
+      _errThisElements(this, "width");
       return window.getComputedStyle(this[i]).width;
     }
 
-    this[i].style.width = _content(
-      content,
-      this[i].style.width
-    );
+    this[i].style.width = _content(content);
   }
 
   return this;
