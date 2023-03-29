@@ -370,7 +370,7 @@ $.prototype.append = function (...child) {
         _append(this[i], child[j]);
       } else {
         _errArgUndefined(child[j], "append");
-        _errArgNotTagName(child[j], "append");
+        // _errArgNotTagName(child[j], "append");
       }
 
       function _append(elem, arg) {
@@ -384,6 +384,46 @@ $.prototype.append = function (...child) {
   }
 
   return this;
+};
+
+// prepend;
+$.prototype.prepend = function (...child) {
+  console.log(this);
+  console.log(...child);
+
+  _errThisElements(this, "prepend");
+  _errThisUndefined(this[0], "prepend");
+
+  for (let i = 0; i < this.length; i++) {
+    // _errThisNotTagName(this[i], "append");
+
+    for (let j = 0; j < child.length; j++) {
+      if (typeof child[j] === "object" && !child[j].tagName) {
+        this[i].prepend(child[j][i]);
+      } else if (typeof child[j] === "object" && child[j].tagName) {
+        this[i].prepend(child[j]);
+      } else {
+        _errArgUndefined(child[j], "prepend");
+      }
+    }
+  }
+
+  return this;
+};
+
+// remove;
+$.prototype.remove = function () {
+  console.log(this);
+
+  _errThisUndefined(this[0], "remove");
+
+  for (let i = 0; i < this.length; i++) {
+    this[i].remove();
+  }
+
+  console.log(this);
+  return;
+  // return this;
 };
 
 // $.prototype.replace = function (val1, val2 = null) {

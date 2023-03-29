@@ -1,177 +1,181 @@
 import $ from "../core";
-import getWidthInUnit from "../modules/getWidthInUnit";
+// import getWidthInUnit from "../modules/getWidthInUnit";
 
-$.prototype.slider = function (unit = "rem") {
+$.prototype.slider = function (time = "0", unit = "px") {
   for (let i = 0; i < this.length; i++) {
     console.log(this[i]);
     const btnPrev = $(this[i]).find("[data-btn='prev']");
     const btnNext = $(this[i]).find("[data-btn='next']");
-    const dots = $(this[i]).find("[data-slide-to]");
+    const dots = $(this[i]).find("[data-indicators]").children();
     const slides = $(this[i]).find("[data-slide]");
     const slidesWrap = $(this[i]).find("[data-slides]");
+    slidesWrap.style("transition", "none");
     const slidesArr = [];
     let slideIndex = 0;
-    let offset = 0;
-
-    // divWrapSlides[0].style.position = "relative";
-    // divWrapSlides.;
+    let dir;
 
     const width = window
       .getComputedStyle(this[i].querySelector("[data-slides]"))
       .width.replace(/\D/g, "");
     const widthUnit = $().getWidthInUnit(width, unit);
-    // const translate = -((width * slideIndex) / 16) + unit;
-    // console.log(translate);
+
     for (let j = 0; j < slides.length; j++) {
-      $(slides[j]).style("width", widthUnit);
+      $(slides[j]).setAttr(`data-slide-to="${j}"`).style("width", widthUnit);
 
       slidesArr[j] = slides[j];
       slides[j].remove();
-      console.log(slides);
     }
-    console.log(slidesArr[slideIndex]);
-
-    // showSlide();
-    // addNewSlide(-1);
-
-    // const newSlides = $(this[i]).find("[data-slides]").children();
-    // newWrapSlides.width(100 * +newSlides.length + "%");
-    // function showSlide() {
-    //   slidesWrap.append(slidesArr[slideIndex]);
-    // }
-
-    // const getSlides = () => {
-    //   console.log($(this[i]));
 
     const newSlidesWrap = $()
       .create("div")
       .show("flex")
       .style("height", "100%")
-      .setAttr("data-id", `slider-${i}`)
-      .style("position", "absolute")
+      .setAttr("data-track-id", `${i}`)
       .parentAppend(slidesWrap);
 
-    addNewSlide(0);
-    //
+    console.log(slidesWrap[0]);
 
-    //   div.width(100 * +newSlides.length + "%");
-    //   // slidesWrap.width(100 * +newSlides.length + "%");
+    newSlidesWrap.append(slidesArr[slideIndex]);
+    // .append(slidesArr[slideIndex], slidesArr[slideIndex + 1])
+    // .prepend(slidesArr[slidesArr.length - 1])
+    // .style("transform", `translateX(-${width}${unit})`);
 
-    //   console.log(slidesArr[slideIndex]);
-    //   console.log(newSlides);
-
-    //   // for (let j = 0; j < slides2.length; j++) {
-    //   //   console.log(slides2[j]);
-    //   // if (unit !== "px") {
-    //   //   $(slides2[j]).width(width / 16 + unit);
-    //   //   console.log(slides2[j]);
-    //   // } else {
-    //   //   $(slides2[j]).width(width + unit);
-    //   // }
-    //   // }
-    // };
-    // getSlides();
-
-    // slidesWrap.width(100 * +slides.length + "%");
-
-    // for (let j = 0; j < slides.length; j++) {
-    //   console.log(slides[j]);
-    //   if (unit !== "px") {
-    //     $(slides[j]).width(width / 16 + unit);
-    //     console.log(slides[j]);
-    //   } else {
-    //     $(slides[j]).width(width + unit);
-    //   }
-    // }
-
-    function addNewSlide() {
-      const slide = slidesArr[slideIndex];
-      console.log(newSlidesWrap.append(slide));
-      slide.style.zIndex = 1;
-      slide.style.left = 100 * offset + "%";
+    // btnPrev.on("click", handlerPrevSlide);
+    // btnNext.on("click", handlerNextSlide);
+    // dots.on("click", handlerDot);
+    onBtns();
+    if (time !== 0) {
+      newSlidesWrap.on("transitionend", moveSlide);
     }
 
-    btnPrev.on("click", (e) => prevSlide(e));
-    btnNext.on("click", (e) => nextSlide(e));
-
-    for (let j = 0; j < dots.length; j++) {
-      $(dots[j]).on("click", (e) => handlerDot(e, dots[j]));
-    }
-
-    const prevSlide = (e) => {
+    function handlerPrevSlide(e) {
       e.preventDefault();
-      // newSlidesWrap[0].style.transition = "all ease 1s";
+      // $(this).disabled(time + 50);
+      dir = -1;
 
-      if (slideIndex <= 0) {
+      if (slideIndex - 1 < 0) {
         slideIndex = slidesArr.length - 1;
       } else {
-        slideIndex = slideIndex - 1;
+        slideIndex--;
       }
-      console.log(slideIndex);
 
-      // changeSlide();
-      offset = 1;
-      console.log(offset);
-      changeDot();
-      addNewSlide();
-
-      const newSlides = $(this[i]).find("[data-id]").children();
-      // const newSlides = $(this[i]).find("[data-slides]").children();
-      console.log(newSlides);
-      // let offset2 = 0;
-
-      for (let j = 0; j < newSlides.length; j++) {
-        newSlides[j].style.left = 100 * j - 100 + "%";
+      setActiveDot();
+      if (time == 0) {
+        setSlides();
+        return;
       }
-      // newSlides[0].style.left = "-100%";
-      // newSlides[1].style.left = "0%";
-      newSlides[0].remove();
-    };
 
-    function nextSlide(e) {
+      prevSlide();
+      offBtns();
+    }
+
+    function handlerNextSlide(e) {
       e.preventDefault();
-      // getSlides();
+      // $(this).disabled(time + 50);
+      dir = 1;
 
-      if (slideIndex >= slidesArr.length - 1) {
+      if (slideIndex + 1 > slidesArr.length - 1) {
         slideIndex = 0;
       } else {
-        slideIndex = slideIndex + 1;
+        slideIndex++;
       }
-      console.log(slideIndex);
 
-      // changeSlide();
-      offset = -1;
-      console.log(offset);
-      changeDot();
-      addNewSlide();
-    }
-
-    function changeSlide() {
-      console.log(
-        slidesWrap.style("transform", `translateX(-${(width * slideIndex) / 16}${unit})`)
-      );
-      slidesWrap.style("transform", `translateX(-${(width * slideIndex) / 16}${unit})`);
-    }
-
-    function changeDot() {
-      dots.removeAttr("data-active");
-      for (let i = 0; i < dots.length; i++) {
-        if ($(dots[i]).getAttr("data-slide-to") == slideIndex) {
-          $(dots[i]).setAttr("data-active", "active");
-        }
+      setActiveDot();
+      if (time == 0) {
+        setSlides();
+        return;
       }
+
+      nextSlide();
+      offBtns();
     }
 
-    function handlerDot(e, dot) {
+    function handlerDot(e) {
+      console.log("кнопки работают");
       e.preventDefault();
-      // getSlides();
+      if ($(this).index() == slideIndex) {
+        return;
+      }
 
+      if (time == 0) {
+        slideIndex = $(this).index();
+        setActiveDot();
+        setSlides();
+        return;
+      }
+
+      if ($(this).index() < slideIndex) {
+        dir = -1;
+        slideIndex = $(this).index();
+        prevSlide();
+      } else if ($(this).index() > slideIndex) {
+        dir = 1;
+        slideIndex = $(this).index();
+        nextSlide();
+      }
+
+      setActiveDot();
+      offBtns();
+    }
+
+    function moveSlide() {
+      if (dir === -1) {
+        setSlides();
+      } else if (dir === 1) {
+        setSlides();
+        showSlide(0);
+      }
+
+      setTime("none");
+      onBtns();
+    }
+
+    function prevSlide() {
+      newSlidesWrap.prepend(slidesArr[slideIndex]);
+      showSlide(-1);
+      setTimeout(() => timeout(`${time}ms`, 0));
+    }
+
+    function nextSlide() {
+      newSlidesWrap.append(slidesArr[slideIndex]);
+      setTimeout(() => timeout(`${time}ms`, -1));
+    }
+
+    function timeout(val, n) {
+      setTime(val);
+      showSlide(n);
+    }
+
+    function showSlide(n) {
+      newSlidesWrap.style("transform", `translateX(${n * width}${unit})`);
+    }
+
+    function setTime(val) {
+      newSlidesWrap.style("transition", val);
+    }
+
+    function setActiveDot() {
       dots.removeAttr("data-active");
-      $(dot).setAttr("data-active", "active");
-      slideIndex = +$(dot).getAttr("data-slide-to");
-      changeSlide();
+      $(dots[slideIndex]).setAttr("data-active", "active");
+    }
+
+    function setSlides() {
+      $($("[data-slider]")[i]).find(`[data-track-id="${i}"]`).children().remove();
+      newSlidesWrap.append(slidesArr[slideIndex]);
+    }
+
+    function onBtns() {
+      btnPrev.on("click", handlerPrevSlide);
+      btnNext.on("click", handlerNextSlide);
+      dots.on("click", handlerDot);
+    }
+
+    function offBtns() {
+      btnPrev.off("click", handlerPrevSlide);
+      btnNext.off("click", handlerNextSlide);
+      dots.off("click", handlerDot);
     }
   }
 };
 
-$("[data-slider]").slider();
+// $("[data-slider]").slider();

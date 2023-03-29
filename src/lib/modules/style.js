@@ -15,18 +15,30 @@ $.prototype.style = function (styleName, value) {
       continue;
     }
 
-    if (value !== "" && !value) {
-      _errThisElements(this, "style");
-      console.log(this[i]);
-      console.log(styleName);
+    if (Array.isArray(styleName)) {
+      console.log(styleName.length);
 
-      return _getValue(window.getComputedStyle(this[i]), styleName);
+      for (let j = 0; j < styleName.length; j++) {
+        console.log("j: ", j);
+        console.log(styleName[j]);
+        _errArgUndefined(styleName[j][0], "style");
+        if (styleName[j][1] !== "") {
+          _errArgUndefined(styleName[j][1], "style");
+        }
+
+        _setValue(this[i].style, styleName[j][0], styleName[j][1]);
+      }
+    } else {
+      if (value !== "" && !value) {
+        _errThisElements(this, "style");
+
+        return _getValue(window.getComputedStyle(this[i]), styleName);
+      }
+
+      _setValue(this[i].style, styleName, value);
     }
-
-    _setValue(this[i].style, styleName, value);
   }
-  console.log(this[0]);
-  console.log(this);
+
   return this;
 };
 
